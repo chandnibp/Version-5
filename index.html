@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Shivank 💘</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+}
+
+.card {
+  background: rgba(255,255,255,0.18);
+  padding: 35px;
+  border-radius: 22px;
+  text-align: center;
+  width: 340px;
+  backdrop-filter: blur(12px);
+}
+
+img.photo {
+  width: 100%;
+  border-radius: 18px;
+  margin-bottom: 18px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  width: 80%;
+  text-align: center;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 26px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff3b6f;
+  color: white;
+}
+
+#no {
+  background: white;
+  color: #ff3b6f;
+  position: relative;
+}
+
+.shake {
+  animation: shake 0.4s infinite;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.blast {
+  animation: blast 0.5s forwards;
+}
+@keyframes blast {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  animation: fall 1.2s linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.balloon {
+  position: fixed;
+  bottom: -100px;
+  width: 40px;
+  height: 55px;
+  border-radius: 50% 50% 45% 45%;
+  animation: floatUp linear infinite;
+}
+.balloon::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 35px;
+  background: rgba(255,255,255,0.7);
+  left: 50%;
+  top: 55px;
+}
+@keyframes floatUp {
+  to {
+    transform: translateY(-120vh);
+    opacity: 0.9;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="https://assets.mixkit.co/music/preview/mixkit-love-romantic-hopeful-558.mp3">
+</audio>
+
+<div class="card" id="screen">
+  <h2>🔐 Enter Password</h2>
+  <p>(Hint: what you call me)</p>
+  <input id="pass" placeholder="Password">
+  <br>
+  <button id="enterBtn">Enter</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const enterBtn = document.getElementById("enterBtn");
+  const passInput = document.getElementById("pass");
+
+  function unlock() {
+    const p = passInput.value.trim().toLowerCase();
+
+    if (p === "chand") {
+      const music = document.getElementById("music");
+      music?.play().catch(() => {});
+      showQuestion();
+    } else {
+      alert("Nope 😌 try again");
+    }
+  }
+
+  enterBtn.addEventListener("click", unlock);
+
+  passInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") unlock();
+  });
+
+});
+
+function showQuestion() {
+  document.getElementById("screen").innerHTML = `
+    <h2>Will you be my Valentine? 💘</h2>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2J3dDM1azd1MDVqMjRtdTQ0cGN4b2p4dGZva2ZtbGpzc216aml2aiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qUIm5wu6LAAog/giphy.gif"
+         style="width:100%; border-radius:16px; margin:18px 0;">
+    <button id="yes" onclick="yes()">Yes 💘</button>
+    <button id="no"
+      onmouseenter="this.classList.add('shake')"
+      onmouseleave="this.classList.remove('shake')"
+      onclick="explodeNo()">No 🙈</button>
+  `;
+}
+
+function explodeNo() {
+  const no = document.getElementById("no");
+  no.classList.add("blast");
+
+  for (let i = 0; i < 50; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background =
+      ["#ff3b6f","#ffd166","#06d6a0","#4d96ff"][Math.floor(Math.random()*4)];
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 1200);
+  }
+
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="height:100vh;display:flex;justify-content:center;align-items:center;background:#333;">
+        <div style="text-align:center;">
+          <h1>WHY ARE YOU LIKE THIS</h1>
+          <button onclick="location.reload()" style="margin-top:20px;">Take me back 💘</button>
+        </div>
+      </div>
+    `;
+  }, 500);
+}
+
+function yes() {
+  document.body.innerHTML = `
+    <div style="height:100vh;display:flex;justify-content:center;align-items:center;background:#ff9a9e;">
+      <div class="card">
+        <img src="IMG_2737.jpg" class="photo">
+        <h1>💖💖💖</h1>
+        <p style="font-size:1.4rem;">
+          You are officially my Valentine, baby! 💕<br><br>
+          I’m, like, obsessed with you!<br>
+          (In a totally non-creepy way.)<br><br>
+          See you on 14th ❤️
+        </p>
+      </div>
+    </div>
+  `;
+
+  setInterval(() => {
+    const b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.background =
+      ["#ff3b6f","#ffd166","#06d6a0","#4d96ff","#f78fb3"][Math.floor(Math.random()*5)];
+    b.style.animationDuration = (Math.random()*4+6)+"s";
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 10000);
+  }, 400);
+}
+</script>
+
+</body>
+</html>
